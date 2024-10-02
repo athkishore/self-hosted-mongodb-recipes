@@ -1,2 +1,2 @@
-# MongoDB Replica Set with Docker
+# Creating a Replica Set with Docker
 
