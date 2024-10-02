@@ -118,9 +118,9 @@ awesomeapp> db.users.insertOne({ username: 'user1', email: 'user1@example.org' }
 We'll then stop and remove the container, and then create a new container with the same volume.
 
 ```
-$ docker stop mongo1
-$ docker rm mongo1
-$ docker run -dit --name mongo1 --mount source=vol1,target=/data/db mongo:7.0
+docker stop mongo1
+docker rm mongo1
+docker run -dit --name mongo1 --mount source=vol1,target=/data/db mongo:7.0
 ```
 
 This time, when we connect using ```mongosh```, we'll still have the database and collection we had created. It became persistent because we mounted a volume for the container to write to.
