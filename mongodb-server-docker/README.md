@@ -1,4 +1,4 @@
-# Setting up a MongoDB server with Docker
+# Setting up a MongoDB Server with Docker
 
 ## Creating the MongoDB container
 
