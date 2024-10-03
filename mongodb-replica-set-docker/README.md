@@ -27,6 +27,8 @@ docker run -dit --name mongo2 --network mongo-network --mount source=vol2,target
 docker run -dit --name mongo3 --network mongo-network --mount source=vol3,target=/data/db mongo:7.0
 ```
 
+## Configuring the Replica Set
+
 Run a shell on the first container, to initiate the replica set. 
 
 ```
@@ -67,3 +69,9 @@ In my case, the IP addresses were 172.18.0.2, 172.18.0.3 and 172.18.0.4 respecti
 ```
 
 Now we can connect to the replica set using the connection URI ```mongodb://mongo1:27017```.
+
+## Docker Compose
+
+Since this involves running multiple containers, we can make it easier to repeat by writing a [docker compose file](docker-compose.yml).
+
+
