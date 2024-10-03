@@ -1,0 +1,49 @@
+networks:
+  mongo-network:
+    driver: bridge
+    name: mongo-network
+    ipam:
+      config:
+        - subnet: 172.18.0.0/16
+
+services:
+  mongo1:
+    image: mongo:7.0
+    command: --replSet set0
+    container_name: mongo1
+    networks:
+      mongo-network:
+        ipv4_address: 172.18.0.2
+    volumes:
+      - vol1:/data/db
+
+  mongo2:
+    image: mongo:7.0
+    command: --replSet set0
+    container_name: mongo2
+    networks:
+      mongo-network:
+        ipv4_address: 172.18.0.3
+    volumes:
+      - vol2:/data/db
+
+  mongo3:
+    image: mongo:7.0
+    command: --replSet set0
+    container_name: mongo3
+    networks:
+      mongo-network: 
+        ipv4_address: 172.18.0.4
+    volumes:
+      - vol3:/data/db
+
+volumes:
+  vol1:
+    name: vol1
+    external: true
+  vol2:
+    name: vol2
+    external: true
+  vol3:
+    name: vol3
+    external: true

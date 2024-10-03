@@ -48,8 +48,22 @@ test> rs.initiate({
 set0 [direct: other] test>
 ```
 
-Running ```rs.status()``` will display the state of the replica set, and which container became the primary. It is not necessary that ```mongo1``` (the instance from which we ran ```rs.initiate()```) becomes the primary.
+Running ```rs.status()``` will display the state of the replica set, and which container became the primary. I had initially thought that ```mongo1``` (the instance from which we ran ```rs.initiate()```) becomes the primary, but it need not be the case. Any of the members can become the primary.
 
+To connect to the replica set, we will need to specify the hostnames in /etc/hosts. ```mongosh``` will be able to connect to each member separately using its IP address, but a client like MongoDB Compass will need the hostname to be resolved.
 
+We can find out the IP addresses of the containers by running:
 
+```
+docker network inspect mongo-network
+```
 
+In my case, the IP addresses were 172.18.0.2, 172.18.0.3 and 172.18.0.4 respectively. So we edit /etc/hosts as follows.
+
+```
+172.18.0.2 mongo1
+172.18.0.3 mongo2
+172.18.0.4 mongo3
+```
+
+Now we can connect to the replica set using the connection URI ```mongodb://mongo1:27017```.
